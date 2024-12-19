@@ -175,14 +175,11 @@ const LaunchDataTable = () => {
               </TableHead>
               <TableBody>
                 {displayedRows.map((row, index) => (
-                  <TableRow
-                    key={index}
-                    onClick={() => handleRowClick(row.rocket_id)}
-                  >
+                  <TableRow key={index} onClick={() => handleRowClick(row.id)}>
                     <TableCell sx={{ color: "secondary.main" }}>
                       {page * rowsPerPage + index + 1}
                     </TableCell>
-                    <TableCell>{row.rocket_id}</TableCell>
+                    <TableCell>{row.id}</TableCell>
                     <TableCell>{row.name}</TableCell>
                     <TableCell>
                       {new Date(row.date_utc).toLocaleDateString("en-UK", {

@@ -2,7 +2,7 @@ import { render, screen, fireEvent, within } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
 import LaunchDataTable from "@/components/LaunchDataTable";
-import { LaunchProvider } from "@/contexts/LaunchContext";
+import LaunchProvider from "@/contexts/LaunchProvider";
 import * as LaunchContextHooks from "@/hooks/useLaunchContext";
 import { Launch } from "@/types/launch";
 
@@ -10,16 +10,16 @@ const mockLaunches: Launch[] = [
   {
     name: "Mission 1",
     date_utc: "2024-01-01T00:00:00.000Z",
-    rocket_id: "rocket1",
-    launchpad_id: "pad1",
+    id: "rocket1",
+    launchpad: "pad1",
     success: true,
     details: "First mission details",
   },
   {
     name: "Mission 2",
     date_utc: "2024-02-01T00:00:00.000Z",
-    rocket_id: "rocket2",
-    launchpad_id: "pad2",
+    id: "rocket2",
+    launchpad: "pad2",
     success: false,
     details: null,
   },
@@ -140,10 +140,10 @@ describe("LaunchDataTable", () => {
     it("handles navigation with special characters in rocket ID", () => {
       const mockLaunchWithSpecialChars = [
         {
+          id: "rocket/1",
           name: "Test Mission",
           date_utc: "2024-01-01T00:00:00.000Z",
-          rocket_id: "rocket/1",
-          launchpad_id: "pad1",
+          launchpad: "pad1",
           success: true,
           details: "Test details",
         },
@@ -202,18 +202,18 @@ describe("LaunchDataTable", () => {
     it("sorts by name with special characters", () => {
       const mockLaunchesWithSpecialChars = [
         {
+          id: "rocket1",
           name: "Zürich Mission",
           date_utc: "2024-01-01T00:00:00.000Z",
-          rocket_id: "rocket1",
-          launchpad_id: "pad1",
+          launchpad: "pad1",
           success: true,
           details: "Test details",
         },
         {
+          id: "rocket2",
           name: "Athens Mission",
           date_utc: "2024-02-01T00:00:00.000Z",
-          rocket_id: "rocket2",
-          launchpad_id: "pad2",
+          launchpad: "pad2",
           success: false,
           details: null,
         },

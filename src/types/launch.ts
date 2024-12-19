@@ -1,11 +1,11 @@
 import React from "react";
 
 export interface Launch {
+  id: string;
   name: string;
   date_utc: string;
-  rocket_id: string;
-  launchpad_id: string;
-  success: boolean;
+  launchpad: string | null;
+  success: boolean | null;
   details: string | null;
 }
 

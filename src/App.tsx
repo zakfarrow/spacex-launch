@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { LaunchProvider } from "@/contexts/LaunchContext";
+import LaunchProvider from "@/contexts/LaunchProvider";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
 import LaunchSummaryModal from "@/components/LaunchSummaryModal";

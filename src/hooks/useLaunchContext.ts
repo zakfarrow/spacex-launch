@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { LaunchContext } from "@/contexts/LaunchContext";
+import LaunchContext from "@/contexts/LaunchContext";
 import { LaunchContextType } from "@/types/launch";
 
 export const useLaunchContext = () => {

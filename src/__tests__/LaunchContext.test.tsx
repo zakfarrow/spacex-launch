@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, waitFor, act } from "@testing-library/react";
-import { LaunchProvider, LaunchContext } from "@/contexts/LaunchContext";
+import LaunchContext from "@/contexts/LaunchContext";
+import LaunchProvider from "@/contexts/LaunchProvider";
 import { getLaunches } from "@/services/spacex.api";
 import { Launch } from "@/types/launch";
 
@@ -28,10 +29,10 @@ const TestComponent = () => {
 describe("LaunchContext", () => {
   const mockLaunches: Launch[] = [
     {
+      id: "rocket1",
       name: "Test Launch",
       date_utc: "2024-01-01T00:00:00.000Z",
-      rocket_id: "rocket1",
-      launchpad_id: "pad1",
+      launchpad: "pad1",
       success: true,
       details: "Test details",
     },
