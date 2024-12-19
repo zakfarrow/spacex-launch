@@ -106,7 +106,7 @@ describe("LaunchDataTable", () => {
       expect(screen.getByText("Mission 1")).toBeInTheDocument();
       expect(screen.getByText("rocket1")).toBeInTheDocument();
       expect(screen.getByText("First mission details")).toBeInTheDocument();
-      expect(screen.getByText("Jan 1, 2024")).toBeInTheDocument();
+      expect(screen.getByText("1 Jan 2024")).toBeInTheDocument();
     });
 
     it('shows "No details available" for null details', () => {
@@ -191,12 +191,12 @@ describe("LaunchDataTable", () => {
       // First click - ascending
       fireEvent.click(sortLabel);
       let rows = screen.getAllByRole("row");
-      expect(within(rows[1]).getByText("Jan 1, 2024")).toBeInTheDocument();
+      expect(within(rows[1]).getByText("1 Jan 2024")).toBeInTheDocument();
 
       // Second click - descending
       fireEvent.click(sortLabel);
       rows = screen.getAllByRole("row");
-      expect(within(rows[1]).getByText("Feb 1, 2024")).toBeInTheDocument();
+      expect(within(rows[1]).getByText("1 Feb 2024")).toBeInTheDocument();
     });
 
     it("sorts by name with special characters", () => {
