@@ -9,6 +9,8 @@ import {
   IconButton,
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 const LaunchSummaryModal = () => {
   const { rocketId } = useParams();
@@ -24,32 +26,74 @@ const LaunchSummaryModal = () => {
   if (!launch) return null;
 
   return (
-    <Dialog open={true} onClose={handleClose} maxWidth="md" fullWidth>
+    <Dialog
+      open={true}
+      onClose={handleClose}
+      maxWidth="sm"
+      fullWidth
+      PaperProps={{
+        sx: {
+          bgcolor: "background.paper",
+          padding: 2,
+        },
+      }}
+    >
       <DialogTitle>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="h6">{launch.name}</Typography>
-          <IconButton onClick={handleClose} size="small">
+          <Typography variant="h6" color="primary" fontWeight={600}>
+            {launch.name}
+          </Typography>
+          <IconButton onClick={handleClose} size="small" color="primary">
             <CloseIcon />
           </IconButton>
         </Box>
       </DialogTitle>
       <DialogContent>
-        <Box className="space-y-4">
-          <Typography>
-            <strong>Launch Date:</strong>{" "}
-            {new Date(launch.date_utc).toLocaleDateString()}
+        <Box>
+          <Typography color="text.primary">
+            <Typography component="span" fontWeight="bold">
+              Launch Date:
+            </Typography>{" "}
+            {new Date(launch.date_utc).toLocaleDateString("en-UK", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
           </Typography>
-          <Typography>
-            <strong>Rocket ID:</strong> {launch.rocket_id}
+          <Typography color="text.primary">
+            <Typography component="span" fontWeight="bold">
+              Rocket ID:
+            </Typography>{" "}
+            {launch.rocket_id}
           </Typography>
-          <Typography>
-            <strong>Launchpad ID:</strong> {launch.launchpad_id}
+          <Typography color="text.primary">
+            <Typography component="span" fontWeight="bold">
+              Launchpad ID:
+            </Typography>{" "}
+            {launch.launchpad_id}
           </Typography>
-          <Typography>
-            <strong>Success:</strong> {launch.success ? "Yes" : "No"}
+          <Typography color="text.primary">
+            <Typography component="span" fontWeight="bold">
+              Success:
+            </Typography>{" "}
+            <Typography
+              component="span"
+              color={launch.success ? "success" : "error"}
+            >
+              {launch.success ? (
+                <CheckCircleIcon sx={{ width: 18, height: 18 }} />
+              ) : (
+                <CancelIcon sx={{ width: 18, height: 18 }} />
+              )}
+            </Typography>
           </Typography>
-          <Typography>
-            <strong>Details:</strong> {launch.details || "No details available"}
+          <Typography color="text.primary">
+            <Typography component="span" fontWeight="bold">
+              Details:
+            </Typography>{" "}
+            <Typography component="span" color="text.secondary">
+              {launch.details || "No details available"}
+            </Typography>
           </Typography>
         </Box>
       </DialogContent>

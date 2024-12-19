@@ -1,13 +1,22 @@
 import LaunchDataTable from "@/components/LaunchDataTable";
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
+import MainTitle from "@/components/MainTitle";
 
 const Home = () => {
   return (
-    <Box className="flex justify-center items-center">
-      <LaunchDataTable />
-      <Outlet />
-    </Box>
+    <>
+      <MainTitle />
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        margin={4}
+      >
+        <LaunchDataTable />
+        <Outlet />
+      </Box>
+    </>
   );
 };
 

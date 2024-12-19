@@ -14,6 +14,7 @@ import {
   CircularProgress,
   IconButton,
   Tooltip,
+  Container,
 } from "@mui/material";
 import { RefreshRounded } from "@mui/icons-material";
 import { useState } from "react";
@@ -80,252 +81,146 @@ const LaunchDataTable = () => {
 
   if (isLoading) {
     return (
-      <Box className="flex justify-center items-center h-60">
-        <CircularProgress />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+      >
+        <CircularProgress color="primary" />
       </Box>
     );
   }
 
   if (error) {
     return (
-      <Box className="flex justify-center items-center h-60 text-red-600">
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+        color="error.main"
+      >
         {error}
       </Box>
     );
   }
 
   return (
-    <Box className="bg-slate-50 rounded-md">
-      <Paper className="shadow-lg rounded-md p-2">
-        <Box className="flex justify-end mb-2 pr-2">
-          <Tooltip title="Refresh data">
-            <IconButton
-              onClick={handleRefresh}
-              disabled={isLoading}
-              className="text-orange-500 hover:text-orange-700"
-            >
-              <RefreshRounded className={isLoading ? "animate-spin" : ""} />
-            </IconButton>
-          </Tooltip>
-        </Box>
-        <TableContainer
-          sx={{
-            height: "60vh",
-            borderRadius: 2,
-            "& .MuiTable-root": {
-              borderCollapse: "collapse",
-              borderSpacing: "0 4px",
-            },
-          }}
-        >
-          <Table
-            stickyHeader
-            aria-label="spacex launches table"
+    <Container maxWidth="xl">
+      <Box sx={{ bgcolor: "background.default", borderRadius: 2 }}>
+        <Paper sx={{ borderRadius: 2, boxShadow: 3, padding: 2 }}>
+          <Box
             sx={{
-              tableLayout: "fixed",
-              width: "100%",
-              maxHeight: "100vh",
+              display: "flex",
+              justifyContent: "flex-end",
+              marginBottom: 2,
+              paddingRight: 2,
             }}
           >
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  sx={{
-                    width: "5%",
-                    fontWeight: "bold",
-                    color: "#f97316",
-                    padding: "5px",
-                  }}
-                ></TableCell>
-                <TableCell
-                  sx={{
-                    width: "15%",
-                    fontWeight: "bold",
-                    color: "#f97316",
-                    padding: "20px",
-                  }}
-                >
-                  Rocket ID
-                </TableCell>
-                <TableCell
-                  sx={{
-                    width: "15%",
-                    fontWeight: "bold",
-                    color: "#f97316",
-                    padding: "20px",
-                    "&:hover": {
-                      color: "#c2410c",
-                    },
-                    "& .MuiTableSortLabel-root": {
-                      color: "#f97316",
-                      "&:hover": {
-                        color: "#c2410c",
-                      },
-                      "&.Mui-active": {
-                        color: "#c2410c",
-                      },
-                      "& .MuiTableSortLabel-icon": {
-                        color: "#c2410c !important",
-                      },
-                    },
-                    "& .Mui-active": {
-                      color: "#c2410c",
-                      "& .MuiTableSortLabel-icon": {
-                        color: "#c2410c !important",
-                      },
-                    },
-                  }}
-                >
-                  <TableSortLabel
-                    active={orderBy === "name"}
-                    direction={orderBy === "name" ? order : "asc"}
-                    onClick={() => handleRequestSort("name")}
-                  >
-                    Name
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell
-                  sx={{
-                    width: "10%",
-                    fontWeight: "bold",
-                    color: "#f97316",
-                    padding: "20px",
-                    "&:hover": {
-                      color: "#c2410c",
-                    },
-                    "& .MuiTableSortLabel-root": {
-                      color: "#f97316",
-                      "&:hover": {
-                        color: "#c2410c",
-                      },
-                      "&.Mui-active": {
-                        color: "#c2410c",
-                      },
-                      "& .MuiTableSortLabel-icon": {
-                        color: "#c2410c !important",
-                      },
-                    },
-                    "& .Mui-active": {
-                      color: "#c2410c",
-                      "& .MuiTableSortLabel-icon": {
-                        color: "#c2410c !important",
-                      },
-                    },
-                  }}
-                >
-                  <TableSortLabel
-                    active={orderBy === "date"}
-                    direction={orderBy === "date" ? order : "asc"}
-                    onClick={() => handleRequestSort("date")}
-                  >
-                    Launch Date
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell
-                  sx={{
-                    fontWeight: "bold",
-                    color: "#f97316",
-                    padding: "20px",
-                  }}
-                >
-                  Details
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {displayedRows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  sx={{
-                    "&:hover": {
-                      backgroundColor: "#f8fafc",
-                    },
-                    cursor: "pointer",
-                    transition: "background-color 0.2s ease",
-                  }}
-                  onClick={() => handleRowClick(row.rocket_id)}
-                >
-                  <TableCell
-                    sx={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      padding: "20px",
-                      color: "#94a3b8",
-                    }}
-                  >
-                    {page * rowsPerPage + index + 1}
+            <Tooltip title="Refresh data">
+              <IconButton
+                onClick={handleRefresh}
+                disabled={isLoading}
+                color="primary"
+                aria-label="Refresh data"
+              >
+                <RefreshRounded className={isLoading ? "animate-spin" : ""} />
+              </IconButton>
+            </Tooltip>
+          </Box>
+          <TableContainer
+            sx={{
+              height: "60vh",
+              borderRadius: 2,
+            }}
+          >
+            <Table
+              stickyHeader
+              aria-label="spacex launches table"
+              sx={{
+                tableLayout: "fixed",
+                width: "100%",
+                maxHeight: "100vh",
+              }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ width: "5%" }}></TableCell>
+                  <TableCell sx={{ width: "15%" }}>Rocket ID</TableCell>
+                  <TableCell sx={{ width: "15%" }}>
+                    <TableSortLabel
+                      active={orderBy === "name"}
+                      direction={orderBy === "name" ? order : "asc"}
+                      onClick={() => handleRequestSort("name")}
+                    >
+                      Name
+                    </TableSortLabel>
                   </TableCell>
-                  <TableCell
-                    sx={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      padding: "20px",
-                    }}
-                  >
-                    {row.rocket_id}
+                  <TableCell sx={{ width: "10%" }}>
+                    <TableSortLabel
+                      active={orderBy === "date"}
+                      direction={orderBy === "date" ? order : "asc"}
+                      onClick={() => handleRequestSort("date")}
+                    >
+                      Launch Date
+                    </TableSortLabel>
                   </TableCell>
-                  <TableCell
-                    sx={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      padding: "20px",
-                    }}
-                  >
-                    {row.name}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      padding: "20px",
-                    }}
-                  >
-                    {new Date(row.date_utc).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      padding: "20px",
-                    }}
-                  >
-                    {row.details || "No details available"}
-                  </TableCell>
+                  <TableCell>Details</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={launches.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          showFirstButton={true}
-          showLastButton={true}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            ".MuiToolbar-root": {
-              paddingLeft: 0,
-              paddingBottom: 2,
-            },
-          }}
-        />
-      </Paper>
-    </Box>
+              </TableHead>
+              <TableBody>
+                {displayedRows.map((row, index) => (
+                  <TableRow
+                    key={index}
+                    onClick={() => handleRowClick(row.rocket_id)}
+                  >
+                    <TableCell sx={{ color: "secondary.main" }}>
+                      {page * rowsPerPage + index + 1}
+                    </TableCell>
+                    <TableCell>{row.rocket_id}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>
+                      {new Date(row.date_utc).toLocaleDateString("en-UK", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </TableCell>
+                    <TableCell>
+                      {row.details || "No details available"}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={launches.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            showFirstButton={true}
+            showLastButton={true}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              ".MuiToolbar-root": {
+                paddingLeft: 0,
+                paddingBottom: 2,
+              },
+            }}
+          />
+        </Paper>
+      </Box>
+    </Container>
   );
 };
 

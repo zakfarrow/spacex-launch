@@ -3,19 +3,26 @@ import { LaunchProvider } from "@/contexts/LaunchContext";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
 import LaunchSummaryModal from "@/components/LaunchSummaryModal";
+import { ThemeProvider } from "@mui/material";
+import theme from "@/theme/theme";
 
 function App() {
   return (
-    <LaunchProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route path="summary/:rocketId" element={<LaunchSummaryModal />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </LaunchProvider>
+    <ThemeProvider theme={theme}>
+      <LaunchProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />}>
+              <Route
+                path="summary/:rocketId"
+                element={<LaunchSummaryModal />}
+              />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </LaunchProvider>
+    </ThemeProvider>
   );
 }
 
