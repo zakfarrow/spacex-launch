@@ -17,7 +17,7 @@ const LaunchSummaryModal = () => {
   const navigate = useNavigate();
   const { launches } = useLaunchContext();
 
-  const launch = launches.find((l) => l.rocket_id === rocketId);
+  const launch = launches.find((l) => l.id === rocketId);
 
   const handleClose = () => {
     navigate("/");
@@ -64,13 +64,13 @@ const LaunchSummaryModal = () => {
             <Typography component="span" fontWeight="bold">
               Rocket ID:
             </Typography>{" "}
-            {launch.rocket_id}
+            {launch.id}
           </Typography>
           <Typography color="text.primary">
             <Typography component="span" fontWeight="bold">
               Launchpad ID:
             </Typography>{" "}
-            {launch.launchpad_id}
+            {launch.launchpad}
           </Typography>
           <Typography color="text.primary">
             <Typography component="span" fontWeight="bold">
